@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse,Http404
 from django.template import loader
 from poll.models import *
@@ -13,17 +13,17 @@ from poll.models import *
 
 def index(request):
     # top_five_questions=Questions.objects.all()
-    top_two_questions=Questions.objects.order_by('-pub_date')[:2]  #THis will order the query result
-    template=loader.get_template('poll/vote.html')
+    top_two_questions=Questions.objects.order_by('-pub_date')[:5]  #THis will order the query result
+    template=loader.get_template('poll/index.html')
     context={'latest_poll':top_two_questions}
     return HttpResponse(template.render(context,request))  
 
 def detail(request, question_id):
-    try:
-       question=Questions.objects.get(pk=question_id)
-    except Questions.DoesNotExist:
-        raise Http404("404 Page not found")
-
+    # try:
+    #    question=Questions.objects.get(pk=question_id)
+    # except Questions.DoesNotExist:
+    #     raise Http404("404 Page not found")
+    question=get_object_or_404(Questions,pk=question_id)
     context={"question":question}
     return render(request,'poll/detail.html',context)
 
