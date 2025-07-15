@@ -4,6 +4,7 @@ from django.db.models import F
 from django.urls import reverse
 from django.template import loader
 from poll.models import *
+from django.views.generic import *
 # Create your views here.
 # def index(request):
 #     # top_five_questions=Questions.objects.all()
@@ -43,7 +44,7 @@ def vote(request, question_id):
         # Redisplay the question voting form.
         return render(
             request,
-            "poll/question.html",
+            "poll/vote.html",
             {
                 "question": question,
                 "error_message": "You didn't select a choice.",
@@ -56,3 +57,27 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse("poll:results", args=(question.id,)))
+
+
+# ------------------------------
+class IndexView(ListView):
+    template_name = "poll/index.html"
+    context_object_name = "latest_poll"
+
+    def get_queryset(self):
+        """Return the last five published questions."""
+        return Questions.objects.order_by("-pub_date")[:5]
+
+
+class QDetailView(DetailView):
+    model = Questions
+    template_name = "poll/detail.html"
+    context_object_name = "question"
+
+class ResultsView(DetailView):
+    model = Questions
+    template_name = "poll/results.html"
+    context_object_name = "question"
+
+   
+
