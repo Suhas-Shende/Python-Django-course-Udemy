@@ -34,3 +34,11 @@ its importat to write because of to avoid confusion between lot of apps in proje
 
 
 Cross Site Request Forgeries. =csrf token
+
+
+
+
+https://docs.google.com/document/d/1X3TLGgg83dgwAFp5uo2C5Vs5pOJ32gmnBtfTmnGKSaU/edit?usp=sharing
+https://docs.google.com/document/d/1TRw7TtRb4fJf6Vxw2BOHgVNELrA85F_l3A2O7wZAlbA/edit?tab=t.0#heading=h.5u4u6jw4r7k8
+https://docs.google.com/document/d/1hFS3SciEmkj1tsFJlqcjij0OPTf1ibod3fMxWM_d-wk/edit?tab=t.0#heading=h.mz6w80pfgmxw
+
