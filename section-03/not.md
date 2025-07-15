@@ -27,3 +27,10 @@ path('<int:question_id>',detail,name="grab_questions")
 In above the 2 id will be save in question_id ,and then it is used in to retrieve id as a questions_id in detail.py in views.py
 2) http://127.0.0.1:8000/100/vote   ,slug is 100 ,urls match is path('<int:question_id>/vote',vote,name="results")
 
+
+This is url ,poll:grab_questions is app_name='poll' in urls.py and grab_questions is also name of urls mapping also called pattern name or view name and where to go,question.id is slug
+<li><a href="{% url 'poll:grab_questions' question.id %}">{{ question.text }}</a></li>
+its importat to write because of to avoid confusion between lot of apps in project
+
+
+Cross Site Request Forgeries. =csrf token
