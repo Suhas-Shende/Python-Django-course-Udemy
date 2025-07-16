@@ -1,27 +1,51 @@
 from django.http import HttpResponse,JsonResponse
 from courses.models.course import Course
+from rest_framework.parsers import JSONParser
 from courses.serializers.course_serializers import CourseSerializer
 from django.shortcuts import get_object_or_404
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 
+@api_view(['GET','POST'])
 def course_list(request):
-    courses=Course.objects.all()
-    serializer=CourseSerializer(courses,many=True)
-    # response = {'courses':list(courses.values())}
-    response={
-        'courses':serializer.data
-    }
-  
-    return JsonResponse(response,safe=False)
+    if request.method == 'GET':
+        courses=Course.objects.all()
+        serializer=CourseSerializer(courses,many=True)
+        # response = {'courses':list(courses.values())}
+        response={
+            'courses':serializer.data
+        }
+    
+        return Response(response)
+    elif request.method == 'POST':
+        # data = JSONParser().parse(request)
+        serializer = CourseSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
 
-
+@api_view(['GET','PUT','DELETE'])
 def course_detail(request,pk):
     courses=get_object_or_404(Course,pk=pk)
-    serializer=CourseSerializer(courses)
-    # response = {'courses':list(courses.values())}
-    response={
-        'courses':serializer.data
-    }
-  
-    return JsonResponse(response,safe=False)
+    if request.method=='GET':
+        
+        serializer=CourseSerializer(courses)
+        # response = {'courses':list(courses.values())}
+        response={
+            'courses':serializer.data
+        }
     
+        return Response(response)
+    elif request.method=="PUT":
+        
+        serializer=CourseSerializer(courses,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            
+            return Response(serializer.data)
+        return Response(serializer.errors)
+    elif request.method=='DELETE':
+        courses.delete()
+        return Response({'Course':'Deleted Successfully'})
