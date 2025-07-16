@@ -3,8 +3,9 @@ from courses.models.course import Course
 
 
 class CourseSerializer(Serializer):
+    
     name=CharField(max_length=100)
-    code=CharField(max_length=10, unique=True)
+    code=CharField(max_length=20)
     description=CharField(max_length=500)
 
 
