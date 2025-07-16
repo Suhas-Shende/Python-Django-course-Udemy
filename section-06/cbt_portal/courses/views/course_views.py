@@ -5,7 +5,7 @@ from courses.serializers.course_serializers import CourseSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
+from rest_framework.status import *
 
 @api_view(['GET','POST'])
 def course_list(request):
@@ -17,14 +17,14 @@ def course_list(request):
             'courses':serializer.data
         }
     
-        return Response(response)
+        return Response(response,status=HTTP_200_OK)
     elif request.method == 'POST':
         # data = JSONParser().parse(request)
         serializer = CourseSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors)
+            return Response(serializer.data,status=HTTP_201_CREATED)
+        return Response(serializer.errors,status=HTTP_400_BAD_REQUEST)
 
 @api_view(['GET','PUT','DELETE'])
 def course_detail(request,pk):
@@ -37,15 +37,15 @@ def course_detail(request,pk):
             'courses':serializer.data
         }
     
-        return Response(response)
+        return Response(response,status=HTTP_200_OK)
     elif request.method=="PUT":
         
         serializer=CourseSerializer(courses,data=request.data)
         if serializer.is_valid():
             serializer.save()
             
-            return Response(serializer.data)
-        return Response(serializer.errors)
+            return Response(serializer.data,status=HTTP_201_CREATED)
+        return Response(serializer.errors,status=HTTP_400_BAD_REQUEST)
     elif request.method=='DELETE':
         courses.delete()
-        return Response({'Course':'Deleted Successfully'})
+        return Response({'Course':'Deleted Successfully'},status=HTTP_204_NO_CONTENT)
