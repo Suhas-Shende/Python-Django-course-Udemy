@@ -12,7 +12,7 @@ class CourseSerializer(Serializer):
                    validators=[UniqueValidator(queryset=Course.objects.all(),message="Code must be unique")]
                    
                    )
-    description=CharField(max_length=500)
+    description=CharField(max_length=500,allow_blank=True)
     # class Meta:
        
     #     # by the 'position' field. No two items in a given list may share
@@ -25,6 +25,13 @@ class CourseSerializer(Serializer):
     #         )
     #     ]
 
+    #Function based validator
+    def validate_description(self,value):
+        """"Check if there presence of word shit and fuck the if present raise the error"""
+        if value.count("Shit") or value.count("Fuck"):
+            raise ValidationError("Please Replace Shit or Fuck in field,Enter valid Description")
+        return value
+        
     def create(self, validated_data):
  
         """Create and return a new `Snippet` instance, given the validated data. """

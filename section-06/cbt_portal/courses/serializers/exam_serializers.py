@@ -1,8 +1,10 @@
 from rest_framework.serializers import *
 from courses.models.exam import Exam
+from courses.serializers.course_serializers import CourseSerializer
 class ExamSerializer(Serializer):
+    course=CourseSerializer(read_only=True)
     course_id=IntegerField()
-    title=CharField(max_length=100)
+    title=SlugField()
     total_marks=IntegerField()
     date=DateTimeField()
     duration_minutes=IntegerField()
