@@ -1,13 +1,29 @@
 from rest_framework.serializers import *
 from courses.models.course import Course
-
+from rest_framework.validators import UniqueValidator,UniqueTogetherValidator
 
 class CourseSerializer(Serializer):
-    
-    name=CharField(max_length=100)
-    code=CharField(max_length=20)
+    id=IntegerField(read_only=True)
+    name=CharField(max_length=100,
+                    validators=[UniqueValidator(queryset=Course.objects.all(),message="Name must be unique")]      
+                   )
+    code=CharField(max_length=20,
+                   
+                   validators=[UniqueValidator(queryset=Course.objects.all(),message="Code must be unique")]
+                   
+                   )
     description=CharField(max_length=500)
-
+    # class Meta:
+       
+    #     # by the 'position' field. No two items in a given list may share
+    #     # the same position.
+    #     validators = [
+    #         UniqueTogetherValidator(
+    #             queryset=Course.objects.all(),
+    #             fields=['name', 'code'],
+    #             message="Name and code must be Unique Together"
+    #         )
+    #     ]
 
     def create(self, validated_data):
  
