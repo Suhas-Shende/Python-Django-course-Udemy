@@ -13,11 +13,9 @@ class ExamQuestionView(APIView):
         courses=ExamQuestion.objects.all()
         serializer=ExamQuestionSerializer(courses,many=True)
         # response = {'courses':list(courses.values())}
-        response={
-            'courses':serializer.data
-        }
+      
     
-        return Response(response,status=HTTP_200_OK) 
+        return Response(serializer.data,status=HTTP_200_OK) 
     
     def post(self,request,format=None):
         serializer = ExamQuestionSerializer(data=request.data)

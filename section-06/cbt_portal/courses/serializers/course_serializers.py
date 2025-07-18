@@ -13,6 +13,7 @@ class CourseSerializer(Serializer):
                    
                    )
     description=CharField(max_length=500,allow_blank=True)
+    exam = HyperlinkedRelatedField(many=True,view_name='courses:exam-detail',read_only=True)
     # class Meta:
        
     #     # by the 'position' field. No two items in a given list may share
