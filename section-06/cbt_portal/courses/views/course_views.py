@@ -72,7 +72,7 @@ class CourseListView(APIView):
         return Response(serializer.errors,status=HTTP_400_BAD_REQUEST)
     
 
-class CourseDetailUpdateDelete(APIView):
+class CourseDetailUpdateDeleteView(APIView):
     def get(self,request,pk,format=None):
         courses=get_object_or_404(Course,pk=pk)
         serializer=CourseSerializer(courses)
