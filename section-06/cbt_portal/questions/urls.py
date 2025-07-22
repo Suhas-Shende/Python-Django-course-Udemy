@@ -11,7 +11,7 @@ urlpatterns = [
 
 
     #Exam Questions Choices Patterns
-    path("choices/all/",ExamChoiceView.as_view(),name="exam-choices-list"),
+    path("choices/all/<int:pk>",ExamChoiceView.as_view(),name="exam-choices-list"),
     path('choices/<int:pk>/',ExamChoiceDetailUpdateDeleteView.as_view(),name="exam-choice-detail")
 
 

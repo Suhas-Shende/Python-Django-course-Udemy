@@ -7,6 +7,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.status import *
 from rest_framework.views import APIView
+from rest_framework.viewsets import ViewSet
+
+
 @api_view(['GET','POST'])
 def course_list(request):
     if request.method == 'GET':
@@ -96,3 +99,19 @@ class CourseDetailUpdateDeleteView(APIView):
         courses=get_object_or_404(Course,pk=pk)
         courses.delete()
         return Response({'Course':'Deleted Successfully'},status=HTTP_204_NO_CONTENT)
+    
+
+
+''' Below is another method to show view and this called viewset'''
+class CourseViewSet(ViewSet):
+    """A simple ViewSet for listing or retrieving users"""
+    def list(self, request):
+        queryset = Course.objects.all()
+        serializer = CourseSerializer(queryset, many=True,context={'request': request})
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        queryset = Course.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        serializer = CourseSerializer(user,context={'request': request})
+        return Response(serializer.data)

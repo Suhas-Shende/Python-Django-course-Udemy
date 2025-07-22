@@ -11,8 +11,8 @@ from questions.serializers.exam_choice_serializer import ExamChoiceSerializer
 
 class ExamChoiceView(APIView):
     
-    def get(self,request,format=None):
-        courses=ExamChoice.objects.all()
+    def get(self,request,pk,format=None):
+        courses=ExamChoice.objects.filter(question_id=pk)
         serializer=ExamChoiceSerializer(courses,many=True)
         # response = {'courses':list(courses.values())}
      

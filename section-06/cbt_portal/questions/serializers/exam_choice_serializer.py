@@ -5,4 +5,4 @@ class ExamChoiceSerializer(ModelSerializer):
     class Meta:
         fields=['question','choice_text']
         model= ExamChoice
-        depth=3
+        depth=1
