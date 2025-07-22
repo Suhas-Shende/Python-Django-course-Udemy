@@ -53,6 +53,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+AUTH_USER_MODEL='accounts.CBTCustomUser'
 ROOT_URLCONF = 'cbt_portal.urls'
 
 TEMPLATES = [
