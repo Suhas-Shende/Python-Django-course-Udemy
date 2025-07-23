@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 from rest_framework.mixins import ListModelMixin,CreateModelMixin
 from rest_framework.generics import GenericAPIView,CreateAPIView,ListAPIView,RetrieveUpdateDestroyAPIView
-
+from rest_framework.permissions import AllowAny
 
 
 # Class based view based on inheritance of generic and mixins which extends CreateModelMixin,ListModelMixin which is Concrete View Classes
@@ -16,6 +16,7 @@ from rest_framework.generics import GenericAPIView,CreateAPIView,ListAPIView,Ret
 class ExamCreateListView(CreateAPIView,ListAPIView):
     queryset = Exam.objects.all()
     serializer_class = ExamSerializer
+    permissions=[AllowAny]
 
 
 

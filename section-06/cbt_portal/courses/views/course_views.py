@@ -8,7 +8,8 @@ from rest_framework.response import Response
 from rest_framework.status import *
 from rest_framework.views import APIView
 from rest_framework.viewsets import ViewSet
-
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 @api_view(['GET','POST'])
 def course_list(request):
@@ -56,7 +57,8 @@ def course_detail(request,pk):
 
 
 class CourseListView(APIView):
-
+    authentication_classes = [ BasicAuthentication]
+    permission_classes = [IsAuthenticated]
     def get(self,request,format=None):
         courses=Course.objects.all()
         serializer=CourseSerializer(courses,many=True,context={'request': request})

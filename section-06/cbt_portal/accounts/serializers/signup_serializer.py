@@ -1,8 +1,8 @@
 from rest_framework.serializers import *
-
+from accounts.models.user import CBTCustomUser
 
 class SignupSerializer(Serializer):
-    username=CharField()
-    email=CharField()
-    role=CharField()
-    password=CharField()
+    password=CharField(write_only=True)
+    class Meta:
+        model=CBTCustomUser
+        fields=['email','username','password','is_student','is_admin']
