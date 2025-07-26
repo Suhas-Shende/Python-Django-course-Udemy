@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'courses',
     'questions',
-    'accounts'
+    'accounts',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -130,7 +131,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #Restframework Authentication-Global Configuration
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
       
     ],
     'DEFAULT_PERMISSION_CLASSES':[
