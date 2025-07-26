@@ -15,10 +15,13 @@ class SignupView(APIView):
     
 {
       
-          "email":"Suhas@123.gcom",
-         "username":"Pratik",
+          "email":"Kamal@123.gcom",
+         "username":"kamal",
          "password":"1234",
-         "first_name":"Sharvari",
-         "last_name":"Wagh"
+         "first_name":"Kamal",
+         "last_name":"Wagh",
+         "role":"admin",
+         "department":"Electronic",
+         "student_id":""
 
         }

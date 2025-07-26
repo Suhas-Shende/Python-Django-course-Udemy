@@ -16,10 +16,11 @@ class LoginView(APIView):
         if serializer.is_valid():
             user=serializer.validated_data['user']
             token,_=Token.objects.get_or_create(user=user)
-            # role='student' if user.is_student else 'admin' if user.is_admin else 'user'
+            role='student' if user.is_student else 'admin' 
             return Response({
                 'token':token.key,
                 'user':UserSerializer(user).data,
+                'role':role
              
             })
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
