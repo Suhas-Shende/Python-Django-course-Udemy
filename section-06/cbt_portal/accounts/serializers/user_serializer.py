@@ -6,7 +6,7 @@ class UserSerializer(ModelSerializer):
     password=CharField(write_only=True)
     role=ChoiceField(choices=['student','admin'],write_only=True)
     student_id=CharField(required=False,allow_blank=True)
-    department=CharField(required=False)
+    department=CharField(required=False,allow_blank=True)
     class Meta:
         fields=['first_name','last_name','email','username','password','role','student_id','department']
         model=CBTCustomUser
