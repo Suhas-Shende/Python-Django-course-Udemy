@@ -138,7 +138,15 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES':[
         'rest_framework.permissions.IsAuthenticated'
-    ]
+    ],
+     'DEFAULT_THROTTLE_CLASSES': [
+       'accounts.throttles.custom_throttle.UserRequestPerMinutes',
+       'accounts.throttles.custom_throttle.UserRequestPerDay'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'minute': '2/min',
+        'day': '2/day'
+    }
 }
 
 from datetime import timedelta
