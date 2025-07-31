@@ -1,3 +1,5 @@
+# Its not in ,for signup process UserSerializer
+
 # from rest_framework.serializers import *
 # from accounts.models.user import CBTCustomUser
 
