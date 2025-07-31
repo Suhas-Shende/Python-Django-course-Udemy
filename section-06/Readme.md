@@ -45,7 +45,9 @@ Create/view/update/delete users, courses, exams, questions and choices
 **📂 Description of various component/apps of CBT Project**
 1. **accounts**:
     Models are Admin,Student,User
+
     Serializer for Login,Signup,Student,Admin
+    
     Views for serializer
 
 
