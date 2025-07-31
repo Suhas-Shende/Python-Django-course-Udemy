@@ -38,12 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+    'django_filters',
+    'drf_spectacular',
+     'drf_spectacular_sidecar',  # required for Django collectstatic discovery
     'courses',
     'questions',
     'accounts',
-    'rest_framework.authtoken',
-    'rest_framework_simplejwt',
-    'results'
+
+    'results',
+    
 ]
 
 MIDDLEWARE = [
@@ -145,13 +150,22 @@ REST_FRAMEWORK = {
        'accounts.throttles.custom_throttle.UserRequestPerDay'
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'minute': '2/min',
-        'day': '2/day'
-    }
+        'minute': '100/min',
+        'day': '100/day'
+    },
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 from datetime import timedelta
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1)
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Computer Base Test Project API',
+    'DESCRIPTION': 'A Computer-Based Portal built with Django REST API to manage user authentication, exams, and results through secure, role-based access. It enables students to take exams, teachers to evaluate, and admins to control all backend operations via APIs.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
 }
